@@ -1,38 +1,243 @@
-.App {
-  text-align: center;
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h2, h3 {
+  color: #333;
+  font-weight: 600;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h3 {
+  margin: 0 0 10px 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app-container {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  gap: 20px;
+  background-color: #fff;
+  min-height: 90vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-list, .cart {
+  width: 48%;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-list h2, .cart h2 {
+  margin-bottom: 20px;
+}
+
+.add-product-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.add-product-form input, .add-product-form button {
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.add-product-form input:focus {
+  border-color: #447cfb;
+}
+
+.add-product-form button {
+  grid-column: span 2;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-product-form button:hover {
+  background-color: #218838;
+}
+
+.product-preview {
+  grid-column: span 2;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 10px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.product-listing {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.product-item:hover {
+  transform: translateY(-5px);
+}
+
+.product-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-controls button {
+  padding: 8px;
+  font-size: 16px;
+  background-color: #447cfb;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  transition: background-color 0.3s ease;
+}
+
+.quantity-controls button:hover {
+  background-color: #3569dd;
+}
+
+.quantity-controls span {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+.delete-product-button, .add-cart-button {
+  background-color: #447cfb;
   color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
 }
 
-.App-link {
-  color: #61dafb;
+.delete-product-button {
+  background-color: #dc3545;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.delete-product-button:hover, .add-cart-button:hover {
+  opacity: 0.85;
+}
+
+.cart ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.cart-item h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.cart-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.remove-cart-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.remove-cart-button:hover {
+  opacity: 0.85;
+}
+
+.cart h3 {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: right;
+  color: #333;
+}
+
+.cart-empty {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+}
+
+.cart-item p {
+  font-size: 16px;
+  color: #666;
+}
+
+.cart-item span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.checkout-button {
+  background-color: #e51b43;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.checkout-button:hover {
+  background-color: #a8384f;
 }
