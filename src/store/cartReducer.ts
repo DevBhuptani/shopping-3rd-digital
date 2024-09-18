@@ -35,16 +35,13 @@ const cartSlice = createSlice({
       state.items = state.items.filter((p) => p.id !== action.payload);
     },
     updateCartQuantity: (state, action) => {
-      state.items = state.items.map((p) =>
-        p.id === action.payload.id
-          ? {
-              ...p,
-              quantity: action.payload.increment
-                ? p.quantity + 1
-                : Math.max(1, p.quantity - 1),
-            }
-          : p
-      );
+      const product = state.items.find((p) => p.id === action.payload.id);
+      if (product) {
+        product.quantity += action.payload.increment ? 1 : -1;
+        if (product.quantity <= 0) {
+          state.items = state.items.filter((p) => p.id !== action.payload.id);
+        }
+      }
     },
     clearCart: (state) => {
       state.items = [];
