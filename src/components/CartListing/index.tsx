@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { clearCart, removeFromCart } from '../../store/cartReducer';
+import {
+  clearCart,
+  removeFromCart,
+  updateCartQuantity,
+} from '../../store/cartReducer';
 
 const CartListing = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -10,6 +14,10 @@ const CartListing = () => {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+  const handleQuantityChange = (id: number, increment: boolean) => {
+    dispatch(updateCartQuantity({ id, increment }));
+  };
 
   const handleCheckout = () => {
     if (cartItems.length > 0) {
@@ -29,14 +37,24 @@ const CartListing = () => {
         <ul>
           {cartItems.map((item) => (
             <li key={item.id} className="cart-item">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="cart-image"
-              />
+              <img src={item.image} alt={item.title} className="cart-image" />
               <h3>{item.title}</h3>
               <p>${item.price.toFixed(2)}</p>
-              <span>Quantity: {item.quantity}</span>
+              <div className="quantity-controls">
+                <button
+                  className="quantity-button"
+                  onClick={() => handleQuantityChange(item.id, false)}
+                >
+                  -
+                </button>
+                <span>{item.quantity}</span>
+                <button
+                  className="quantity-button"
+                  onClick={() => handleQuantityChange(item.id, true)}
+                >
+                  +
+                </button>
+              </div>
               <button
                 className="remove-cart-button"
                 onClick={() => dispatch(removeFromCart(item.id))}
